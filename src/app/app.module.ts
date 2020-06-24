@@ -1,14 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, Injector } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+/* import { AppComponent } from './app.component'; */
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { createCustomElement } from '@angular/elements';
+import { DashboardTileComponent } from './dashboard/dashboard-tile/dashboard-tile.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    /* AppComponent, */
+    DashboardTileComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,9 +20,21 @@ import { DashboardModule } from './dashboard/dashboard.module';
     AlertModule.forRoot()
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [/* AppComponent */],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
-  ]
+  ],
+  entryComponents: [
+    DashboardTileComponent
+  ],
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private injector: Injector) {
+  }
+
+  ngDoBootstrap() {
+    const externalTileCE = createCustomElement(DashboardTileComponent, { injector: this.injector });
+    customElements.define('external-dashboard-tile', externalTileCE);
+  }
+}
