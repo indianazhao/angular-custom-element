@@ -1,0 +1,48 @@
+<html>
+  <title>External Bashboard Tile</title>
+  <head>
+    <!-- 使用 href="/" 雖然可以解決 No base href set. 的錯誤訊息，但在檔案夾裡透過雙擊 index.html 打開檔案方式開啟網頁，會出現錯誤訊息：「Failed to load resource: net::ERR_FILE_NOT_FOUND」，所以要改用 href="./" -->
+    <base href="./">
+    <!-- 缺少下面這行，會出現錯誤訊息：「Error: No base href set. Please provide a value for the APP_BASE_HREF token or add a base element to the document.」 -->
+    <!-- <base href="/"> -->
+
+    <!-- 外部引用 bootstrap CDN -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!-- static -->
+    <div class="container mt-5">
+      <external-dashboard-tile class="col-lg-4 col-md-3 col-sm-2"
+                               a="100"
+                               b="50"
+                               c="25"></external-dashboard-tile>
+    </div>
+    <script src="external-dashboard-tile.js"></script>
+
+    <!-- dynamic -->
+    <!-- <div class="container mt-5">
+      <div id="content"></div>
+    </div>
+    <script>
+      // add script tag
+      const script = document.createElement('script');
+      script.src = './external-dashboard-tile.js';
+      document.body.appendChild(script);
+
+      // add web component
+      const tile = document.createElement('external-dashboard-tile');
+      tile.setAttribute('class', 'col-lg-4 col-md-3 col-sm-2');
+      tile.setAttribute('a', '100');
+      tile.setAttribute('b', '50');
+      tile.setAttribute('c', '25');
+
+      const content = document.getElementById('content');
+      content.appendChild(tile);
+    </script> -->
+
+  </body>
+</html>

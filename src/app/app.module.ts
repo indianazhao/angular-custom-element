@@ -35,6 +35,14 @@ export class AppModule {
 
   ngDoBootstrap() {
     const externalTileCE = createCustomElement(DashboardTileComponent, { injector: this.injector });
-    customElements.define('external-dashboard-tile', externalTileCE);
+
+    /** 透過使用 http-server 執行網站（透過一般 Vanilla JS 的方式使用 custom element），會出現以下錯誤：「ERROR DOMException: Failed to execute
+     *  'define' on 'CustomElementRegistry': the name "external-dashboard-tile" has already been used with this registry」
+     *  必須改成以下作法，避免重複定義 external-dashboard-tile。
+     */
+    // customElements.define('external-dashboard-tile', externalTileCE);
+    if (!customElements.get('external-dashboard-tile')) {
+      customElements.define('external-dashboard-tile', externalTileCE);
+    }
   }
 }
